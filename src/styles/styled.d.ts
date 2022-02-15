@@ -4,7 +4,7 @@ declare module 'styled-components' {
    export interface DefaltTheme {
       title: string
 
-      color:{
+      colors:{
          primary: string
          secondary: string
          tertiary: string
