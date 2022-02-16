@@ -1,6 +1,7 @@
 import React, {useMemo} from "react";
 import { Container, Profile, Welcome, UserName } from "./style";
 import emojis from "../../utils/emojis";
+import Toggle from '../Toggle'
 
 const MainHeader: React.FC = () => {
   
@@ -11,6 +12,7 @@ const MainHeader: React.FC = () => {
    
    return (
       <Container>
+         <Toggle/>
          <h1>Toogle</h1>
 
          <Profile>
