@@ -21,83 +21,10 @@ const List: React.FC = () => {
 
          <Content>
             <HistoryFinanceCard
-            cardColor="#313862"
-            tagColor="#e44c4e"
-            title="Conta de luz"
-            subtitle="17/02/2022"
-            amount="R$ 257,89"
-            />
-            
-            <HistoryFinanceCard
-            cardColor="#313862"
-            tagColor="#e44c4e"
-            title="Conta de luz"
-            subtitle="17/02/2022"
-            amount="R$ 257,89"
-            />
-
-            <HistoryFinanceCard
-            cardColor="#313862"
-            tagColor="#e44c4e"
-            title="Conta de luz"
-            subtitle="17/02/2022"
-            amount="R$ 257,89"
-            />
-
-            <HistoryFinanceCard
-            cardColor="#313862"
-            tagColor="#e44c4e"
-            title="Conta de luz"
-            subtitle="17/02/2022"
-            amount="R$ 257,89"
-            />
-
-            <HistoryFinanceCard
-            cardColor="#313862"
-            tagColor="#e44c4e"
-            title="Conta de luz"
-            subtitle="17/02/2022"
-            amount="R$ 257,89"
-            />
-
-            <HistoryFinanceCard
-            cardColor="#313862"
-            tagColor="#e44c4e"
-            title="Conta de luz"
-            subtitle="17/02/2022"
-            amount="R$ 257,89"
-            />
-
-            <HistoryFinanceCard
-            cardColor="#313862"
-            tagColor="#e44c4e"
-            title="Conta de luz"
-            subtitle="17/02/2022"
-            amount="R$ 257,89"
-            />
-
-            <HistoryFinanceCard
-            cardColor="#313862"
-            tagColor="#e44c4e"
-            title="Conta de luz"
-            subtitle="17/02/2022"
-            amount="R$ 257,89"
-            />
-
-            <HistoryFinanceCard
-            cardColor="#313862"
-            tagColor="#e44c4e"
-            title="Conta de luz"
-            subtitle="17/02/2022"
-            amount="R$ 257,89"
-            />
-
-            <HistoryFinanceCard
-            cardColor="#313862"
-            tagColor="#e44c4e"
-            title="Conta de luz"
-            subtitle="17/02/2022"
-            amount="R$ 257,89"
+               tagColor="#e44c4e"
+               title="Conta de luz"
+               subtitle="17/02/2022"
+               amount="R$ 257,89"
             />
          </Content>
       </Container>
