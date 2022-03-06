@@ -2,6 +2,8 @@ import styled from "styled-components";
 
 export const Container = styled.div``
 
+export const Content = styled.main``
+
 export const Filters = styled.div`
    display: flex;
    justify-content: center;
@@ -9,10 +11,10 @@ export const Filters = styled.div`
    width: 100%;
 
    .tag-filter{
-      font-size: 18px;
-      font-weight: 500;
       background: none;
       color: ${porps=> porps.theme.colors.white};
+      font-size: 18px;
+      font-weight: 500;
 
       margin: 0 10px;
       transition: opacity .3s;
@@ -43,5 +45,3 @@ export const Filters = styled.div`
       opacity: 1;
    }
 `
-
-export const Content = styled.div``
