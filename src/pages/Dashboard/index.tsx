@@ -1,10 +1,18 @@
 import React, {useState, useMemo} from "react";
-import {Container} from './style'
+
+import {Container, Content} from './style'
+
 import ContentHeader from '../../components/ContentHeader'
 import SelectInput from "../../components/SelectInput";
+import WalletBox from "../../components/WalletBox";
+import MessageBox from "../../components/MenssageBox";
+
 import listOfMonths from '../../utils/months'
 import expenses from "../../dataBase/expenses";
 import gains from "../../dataBase/gains";
+
+import happyImg from "../../assets/happy.svg"
+import sadImg from "../../assets/sad.svg"
 
 const Dashboard: React.FC= () => {
    const [monthSelected, setMonthSelected] = useState<number>(new Date().getMonth()+1)
@@ -60,6 +68,39 @@ const Dashboard: React.FC= () => {
             <SelectInput options={months} onChange={(e) => handleMonthSelected(e.target.value)} defaultValue={monthSelected} />
             <SelectInput options={years} onChange={(e) => handleYearSelected(e.target.value)} defaultValue={yearSelected} />
          </ContentHeader>
+
+         <Content>
+            <WalletBox
+               title="saldo"
+               amount={150.00}
+               footerLabel='atualizado com base nas entradas e saídas'
+               icon="dolar"
+               color="#4e41f0"
+            />
+
+            <WalletBox
+               title="entradas"
+               amount={5000.00}
+               footerLabel='atualizado com base nas entradas e saídas'
+               icon="arrowUp"
+               color="#f7931b"
+            />
+
+            <WalletBox
+               title="saídas"
+               amount={4850.00}
+               footerLabel='atualizado com base nas entradas e saídas'
+               icon="arrowDown"
+               color="#e44c4e"
+            />
+
+            <MessageBox
+               title="Muito bem!"
+               description="Sua carteira está positiva!"
+               footerText="Continue assim. Considere investir o seu saldo."
+               icon={happyImg}
+            />
+         </Content>
       </Container>
    )
 }
