@@ -13,6 +13,7 @@ import gains from "../../dataBase/gains";
 
 import happyImg from "../../assets/happy.svg"
 import sadImg from "../../assets/sad.svg"
+import grinningImg from "../../assets/grinning.svg"
 
 const Dashboard: React.FC= () => {
    const [monthSelected, setMonthSelected] = useState<number>(new Date().getMonth()+1)
@@ -44,11 +45,79 @@ const Dashboard: React.FC= () => {
 
    },[])
 
+   const totalExpenses = useMemo(() => {
+      let total: number = 0
+
+      expenses.forEach(item => {
+         const date = new Date(item.date)
+         const year = date.getFullYear()
+         const month = date.getMonth()+1
+
+         if(month === monthSelected && year === yearSelected){
+            try{
+               total += Number(item.amount)
+            }catch{
+               throw new Error('Invalid amount. Amount must be number.')
+            }
+         }
+      })
+      return total
+   },[monthSelected, yearSelected])//Deixar dinâmico o cartão das despesas no dashboard
+
+   const totalGains = useMemo (() => {
+      let total:number = 0
+
+      gains.forEach(item => {
+         const date = new Date(item.date)
+         const year = date.getFullYear()
+         const month = date.getMonth()+1
+
+         if(month === monthSelected && year === yearSelected){
+            try{
+               total += Number(item.amount)
+            }catch{
+               throw new Error('Invalid amount. Amount must be number.')
+            }
+         }
+      })
+      return total
+   },[monthSelected, yearSelected])//Deixar dinâmico o cartão dos ganhos no dashboard
+
+   const totalBalance = useMemo(() => {
+      return totalGains - totalExpenses
+   },[totalGains, totalExpenses])// Deixar dinâmico o saldo
+
+   const messageCard = useMemo(() => {
+      if(totalBalance < 0){
+         return {
+            title:"Que trite!",
+            description:"Neste mês sua carteira está negativa!",
+            footerText:"Verifique seus gastos!",
+            icon: sadImg
+         }
+      } else if(totalBalance > 0){
+         return {
+            title:"Muito bem!",
+            description:"Sua carteira está positiva!",
+            footerText:"Continue assim. Considere investir o seu saldo.",
+            icon: happyImg
+         }
+      } else{
+         return {
+            title:"Ufa!",
+            description:"Bateu na trave!",
+            footerText:"Revise suas despesas, aumente seus rendimentos.",
+            icon: grinningImg
+         }
+      }
+
+   },[totalBalance])//Mensagem do MessageBox, dinâmico conforme o saldo for negativo, positivo ou igual.
+
    const handleMonthSelected = (month: string) => {
       try{
          const parseMonth = Number(month)
          setMonthSelected(parseMonth)
-      }catch(error){
+      }catch{
          throw new Error('Invalid month value. Is accept 0 - 24.')
       }
    }
@@ -57,7 +126,7 @@ const Dashboard: React.FC= () => {
       try{
          const parseYear = Number(year)
          setYearSelected(parseYear)
-      }catch(error){
+      }catch{
          throw new Error('Invalid month value. Is accept integer number.')
       }
    }
@@ -72,7 +141,7 @@ const Dashboard: React.FC= () => {
          <Content>
             <WalletBox
                title="saldo"
-               amount={150.00}
+               amount={totalBalance}
                footerLabel='atualizado com base nas entradas e saídas'
                icon="dolar"
                color="#4e41f0"
@@ -80,7 +149,7 @@ const Dashboard: React.FC= () => {
 
             <WalletBox
                title="entradas"
-               amount={5000.00}
+               amount={totalGains}
                footerLabel='atualizado com base nas entradas e saídas'
                icon="arrowUp"
                color="#f7931b"
@@ -88,17 +157,17 @@ const Dashboard: React.FC= () => {
 
             <WalletBox
                title="saídas"
-               amount={4850.00}
+               amount={totalExpenses}
                footerLabel='atualizado com base nas entradas e saídas'
                icon="arrowDown"
                color="#e44c4e"
             />
 
             <MessageBox
-               title="Muito bem!"
-               description="Sua carteira está positiva!"
-               footerText="Continue assim. Considere investir o seu saldo."
-               icon={happyImg}
+               title={messageCard.title}
+               description={messageCard.description}
+               footerText={messageCard.footerText}
+               icon={messageCard.icon}
             />
          </Content>
       </Container>
