@@ -6,6 +6,7 @@ import ContentHeader from '../../components/ContentHeader'
 import SelectInput from "../../components/SelectInput";
 import WalletBox from "../../components/WalletBox";
 import MessageBox from "../../components/MenssageBox";
+import PieChart from "../../components/PieChart";
 
 import listOfMonths from '../../utils/months'
 import expenses from "../../dataBase/expenses";
@@ -62,7 +63,7 @@ const Dashboard: React.FC= () => {
          }
       })
       return total
-   },[monthSelected, yearSelected])//Deixar dinâmico o cartão das despesas no dashboard
+   },[monthSelected, yearSelected])
 
    const totalGains = useMemo (() => {
       let total:number = 0
@@ -81,11 +82,11 @@ const Dashboard: React.FC= () => {
          }
       })
       return total
-   },[monthSelected, yearSelected])//Deixar dinâmico o cartão dos ganhos no dashboard
+   },[monthSelected, yearSelected])
 
    const totalBalance = useMemo(() => {
       return totalGains - totalExpenses
-   },[totalGains, totalExpenses])// Deixar dinâmico o saldo
+   },[totalGains, totalExpenses])
 
    const messageCard = useMemo(() => {
       if(totalBalance < 0){
@@ -169,6 +170,8 @@ const Dashboard: React.FC= () => {
                footerText={messageCard.footerText}
                icon={messageCard.icon}
             />
+
+            <PieChart/>
          </Content>
       </Container>
    )
