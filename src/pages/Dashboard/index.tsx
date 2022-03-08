@@ -6,7 +6,7 @@ import ContentHeader from '../../components/ContentHeader'
 import SelectInput from "../../components/SelectInput";
 import WalletBox from "../../components/WalletBox";
 import MessageBox from "../../components/MenssageBox";
-import PieChart from "../../components/PieChart";
+import PieGraphic from "../../components/PieGraphic";
 
 import listOfMonths from '../../utils/months'
 import expenses from "../../dataBase/expenses";
@@ -112,7 +112,29 @@ const Dashboard: React.FC= () => {
          }
       }
 
-   },[totalBalance])//Mensagem do MessageBox, dinâmico conforme o saldo for negativo, positivo ou igual.
+   },[totalBalance])
+
+   const relationExpensesGains = useMemo(() => {
+      const total = totalGains + totalExpenses
+      const gainsPercent = (totalGains / total) * 100
+      const expensesPercent = (totalExpenses / total) * 100
+
+      const PizzaData = [
+         {
+            name: 'entradas',
+            value: totalGains,
+            percent: Number(gainsPercent.toFixed(1)),
+            color: '#e44c4e'
+         },
+         {
+            name: 'saidas',
+            value: totalExpenses,
+            percent: Number(expensesPercent.toFixed(1)),
+            color: '#f7931b'
+         }
+      ]
+      return PizzaData
+   },[totalGains, totalExpenses])
 
    const handleMonthSelected = (month: string) => {
       try{
@@ -171,7 +193,7 @@ const Dashboard: React.FC= () => {
                icon={messageCard.icon}
             />
 
-            <PieChart/>
+            <PieGraphic data={relationExpensesGains}/>
          </Content>
       </Container>
    )
