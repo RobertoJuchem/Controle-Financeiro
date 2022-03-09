@@ -50,11 +50,11 @@ export const Legend = styled.li<ILegendProps>`
    >div{
       background-color: ${props => props.color};
       border-radius: 5px;
-      font-size: 18px;
+      font-size: 16px;
       height: 40px;
       line-height: 40px;
       text-align: center;
-      width: 40px;
+      width: 50px;
    }
 
    >span{
