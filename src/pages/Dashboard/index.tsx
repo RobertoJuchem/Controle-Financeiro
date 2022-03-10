@@ -7,7 +7,8 @@ import SelectInput from "../../components/SelectInput";
 import WalletBox from "../../components/WalletBox";
 import MessageBox from "../../components/MenssageBox";
 import PieGraphic from "../../components/PieGraphic";
-import HistoryLineBox from "../../components/HistoryLineBox";
+import HistoryLineBox from "../../components/HistoryLineGraphic";
+import BarChartGraphic from "../../components/BarChart/index.";
 
 import listOfMonths from '../../utils/months';
 import expenses from "../../dataBase/expenses";
@@ -16,6 +17,7 @@ import gains from "../../dataBase/gains";
 import happyImg from "../../assets/happy.svg";
 import sadImg from "../../assets/sad.svg";
 import grinningImg from "../../assets/grinning.svg";
+import HistoryLineGraphic from "../../components/HistoryLineGraphic";
 
 const Dashboard: React.FC= () => {
    const [monthSelected, setMonthSelected] = useState<number>(new Date().getMonth()+1);
@@ -170,6 +172,41 @@ const Dashboard: React.FC= () => {
       })
    },[yearSelected]);
 
+   const relationExpensesRecurrentVersusEventual = useMemo(() => {
+      let amountrecurrent = 0
+      let amountEventual = 0
+
+      expenses.filter((expense) => {
+         const date = new Date(expense.date)
+         const year = date.getFullYear()
+         const month = date.getMonth() +1
+
+         return month === monthSelected && year === yearSelected
+      })
+      .forEach((expense) => {
+         if(expense.frequency === 'recorrente'){
+            return amountrecurrent += Number(expense.amount)
+         }
+         if(expense.frequency === 'eventual'){
+            return amountEventual += Number(expense.amount)
+         }
+      })
+      const total = amountrecurrent + amountEventual
+      
+      return [{
+         name: 'Recorrentes',
+         amount: amountrecurrent,
+         percent: Number(((amountrecurrent/total)/100).toFixed(1)),
+         color: '#f7931b'
+      },
+      {
+         name: 'Eventuais',
+         amount: amountEventual,
+         percent: Number(((amountEventual/total)/100).toFixed(1)),
+         color: '#e44c4e'
+      }]
+   },[monthSelected, yearSelected]);
+
    const handleMonthSelected = (month: string) => {
       try{
          const parseMonth = Number(month)
@@ -229,10 +266,15 @@ const Dashboard: React.FC= () => {
 
             <PieGraphic data={relationExpensesGains}/>
 
-            <HistoryLineBox
+            <HistoryLineGraphic
                data={historyLineData}
                lineColorAmountEntry='#f7931b'
                lineColorAmountOutput='#e44c4e'
+            />
+
+            <BarChartGraphic
+               title = 'Saídas'
+               data = {relationExpensesRecurrentVersusEventual}
             />
          </Content>
       </Container>

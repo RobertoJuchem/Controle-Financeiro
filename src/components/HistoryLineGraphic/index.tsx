@@ -13,7 +13,7 @@ interface IHistoryLineBox{
    lineColorAmountOutput: string
 }
 
-const HistoryLineBox: React.FC<IHistoryLineBox> = ({data, lineColorAmountEntry, lineColorAmountOutput}) => (
+const HistoryLineGraphic: React.FC<IHistoryLineBox> = ({data, lineColorAmountEntry, lineColorAmountOutput}) => (
       <Container>
 
          <Header>
@@ -60,4 +60,4 @@ const HistoryLineBox: React.FC<IHistoryLineBox> = ({data, lineColorAmountEntry, 
       </Container>
    )
 
-export default HistoryLineBox
+export default HistoryLineGraphic
