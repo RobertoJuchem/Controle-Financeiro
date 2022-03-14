@@ -12,6 +12,13 @@ export const Container = styled.div`
    height: 260px;
    margin: 10px 0;
    width: 48%;
+
+   @media (max-width: 770px){
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      width: 100%;
+   }
 `
 
 export const SideLeft = styled.aside`
@@ -39,6 +46,13 @@ export const LegendContainer = styled.ul`
    ::-webkit-scrollbar-track{
       background-color: ${props => props.theme.colors.tertiary};
       border-radius: 10px;
+   }
+
+   @media (max-width: 770px){
+      display: flex;
+      flex-direction: row;
+      height: 100%;
+      width: 100%;
    }
 `
 

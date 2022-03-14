@@ -4,10 +4,14 @@ export const Container = styled.div`
    background-color: ${props => props.theme.colors.tertiary};
    border-radius: 8px;
    color: ${props=> props.theme.colors.white};
-   height: 320px;
+   height: 340px;
    margin: 10px 0;
    padding: 30px 20px;
    width: 100%;
+
+   @media (max-width:770px){
+      height: 100%;
+   }
 `
 export const Header = styled.header`
    display: flex;
@@ -16,6 +20,15 @@ export const Header = styled.header`
    >h2{
       margin-bottom: 2px;
       padding-left: 18px;
+   }
+
+   @media(max-width: 770px){
+      align-items: center;
+      flex-direction: column;
+
+      >h2{
+         padding: 0;
+      }
    }
 `
 
