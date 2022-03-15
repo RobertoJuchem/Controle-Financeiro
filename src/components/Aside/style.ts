@@ -32,11 +32,33 @@ export const Header = styled.div`
    height: 70px;
 `
 
+export const ToggleMenu = styled.button`
+   background-color: ${props => props.theme.colors.warning};
+   color: ${props => props.theme.colors.white};
+   border-radius: 5px;
+   display: none;
+   font-size: 22px;
+   height: 40px;
+   width: 40px;
+   transition: opacity .3s;
+
+   &:hover{
+      opacity: 0.7;
+   }
+
+   @media (max-width: 600px){
+      align-items: center;
+      display: flex;
+      justify-content: center;
+   }
+`
+
 export const LogImg = styled.img`
    height: 40px;
    width: 40px;
 
    @media (max-width: 600px){
+      display: none;
       height: 25px;
       width: 25px;
    }
